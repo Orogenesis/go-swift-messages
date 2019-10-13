@@ -18,6 +18,7 @@ type swiftBlockElement struct {
 	shortMode bool
 }
 
+// MustEncode returns message if err is nil and panics otherwise.
 func MustEncode(swiftBlock ...SwiftBlockRule) string {
 	m, err := Encode(swiftBlock...)
 	if err != nil {
@@ -27,6 +28,7 @@ func MustEncode(swiftBlock ...SwiftBlockRule) string {
 	return m
 }
 
+// Encode encodes swiftBlock into a SWIFT message or returns an error.
 func Encode(swiftBlock ...SwiftBlockRule) (message string, err error) {
 	queue := list.New()
 	braceCounter := 0

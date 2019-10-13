@@ -1,6 +1,9 @@
+[![Coverage Status](https://coveralls.io/repos/github/Orogenesis/go-swift-messages/badge.svg?branch=master)](https://coveralls.io/github/Orogenesis/go-swift-messages?branch=master)
+[![GoDoc](http://godoc.org/github.com/orogenesis/go-swift-messages?status.svg)](http://godoc.org/github.com/orogenesis/go-swift-messages)
+
 # go-swift-messages
 
-go-swift-messages parse SWIFT messages with different message types (MT101, MT103, MT104, MT202, MT509, MT900, MT910, MT940, MT942, MT950) into abstract syntax tree (AST) and convert ASTs back to SWIFT message.  
+Parses SWIFT financial messages with different message types (MT101, MT103, MT104, MT202, MT509, MT900, MT910, MT940, MT942, MT950) into abstract syntax tree (AST) and convert ASTs back to SWIFT financial message.  
 
 ### What's an MT103?
 

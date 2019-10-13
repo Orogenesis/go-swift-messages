@@ -1,3 +1,4 @@
+// Package go_swift_messages implements a parser for SWIFT financial messages
 package go_swift_messages
 
 import (
@@ -15,14 +16,17 @@ type SwiftBlock struct {
 	Value interface{}
 }
 
+// Represents a parser.
 type Parser struct {
 	*Lexer
 }
 
+// Returns a new instance of Parser.
 func NewParser(l *Lexer) *Parser {
 	return &Parser{Lexer: l}
 }
 
+// Parses SWIFT message.
 func (p *Parser) Parse() (message SwiftMessage, err error) {
 	for {
 		tok, _ := p.Lexer.Scan()
@@ -40,6 +44,7 @@ func (p *Parser) Parse() (message SwiftMessage, err error) {
 	}
 }
 
+// Parses SWIFT block.
 func (p *Parser) parseBlock() (SwiftBlock, error) {
 	var (
 		tok        Token

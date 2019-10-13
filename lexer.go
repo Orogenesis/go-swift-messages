@@ -6,15 +6,18 @@ import (
 	"io"
 )
 
+// Lexer represents a lexical scanner.
 type Lexer struct {
 	*bufio.Reader
 	prev Token
 }
 
+// Returns a new instance of Lexer.
 func NewLexer(r io.Reader) *Lexer {
 	return &Lexer{Reader: bufio.NewReader(r)}
 }
 
+// Returns the next token and literal value.
 func (l *Lexer) Scan() (tok Token, lit string) {
 	ch := l.read()
 	switch ch {
@@ -46,6 +49,7 @@ func (l *Lexer) Scan() (tok Token, lit string) {
 	return tok, lit
 }
 
+// Consumes the current rune and all contiguous ident runes.
 func (l *Lexer) scanIdent(stopCharacter rune) string {
 	buf := &bytes.Buffer{}
 	buf.WriteRune(l.read())
@@ -64,6 +68,8 @@ func (l *Lexer) scanIdent(stopCharacter rune) string {
 	return buf.String()
 }
 
+// Reads the next rune from the bufferred reader.
+// Returns the rune(0) if an error occurs (or io.EOF is returned).
 func (l *Lexer) read() rune {
 	ch, _, err := l.ReadRune()
 	if err != nil {
@@ -73,4 +79,5 @@ func (l *Lexer) read() rune {
 	return ch
 }
 
+// Places the previously read rune back on the reader.
 func (l *Lexer) unread() { _ = l.UnreadRune() }
