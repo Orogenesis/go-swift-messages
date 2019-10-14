@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/Orogenesis/go-swift-messages.svg?branch=master)](https://travis-ci.org/Orogenesis/go-swift-messages)
 [![Coverage Status](https://coveralls.io/repos/github/Orogenesis/go-swift-messages/badge.svg?branch=master)](https://coveralls.io/github/Orogenesis/go-swift-messages?branch=master)
 [![GoDoc](http://godoc.org/github.com/orogenesis/go-swift-messages?status.svg)](http://godoc.org/github.com/orogenesis/go-swift-messages)
 
