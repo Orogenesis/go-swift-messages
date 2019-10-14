@@ -1,4 +1,4 @@
-package go_swift_messages
+package swiftmessages
 
 import (
 	"bufio"
@@ -12,12 +12,12 @@ type Lexer struct {
 	prev Token
 }
 
-// Returns a new instance of Lexer.
+// NewLexer returns a new instance of Lexer.
 func NewLexer(r io.Reader) *Lexer {
 	return &Lexer{Reader: bufio.NewReader(r)}
 }
 
-// Returns the next token and literal value.
+// Scan returns the next token and literal value.
 func (l *Lexer) Scan() (tok Token, lit string) {
 	ch := l.read()
 	switch ch {

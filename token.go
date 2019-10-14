@@ -1,5 +1,6 @@
-package go_swift_messages
+package swiftmessages
 
+// Token represents a lexical token.
 type Token int
 
 const (

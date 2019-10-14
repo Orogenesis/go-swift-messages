@@ -1,4 +1,4 @@
-package go_swift_messages
+package swiftmessages
 
 import (
 	"container/list"

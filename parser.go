@@ -1,32 +1,35 @@
-// Package go_swift_messages implements a parser for SWIFT financial messages
-package go_swift_messages
+// Package swiftmessages implements a parser for SWIFT financial messages
+package swiftmessages
 
 import (
 	"errors"
 )
 
+// ErrSwiftBlockInvalid is raised when an invalid SWIFT financial message received.
 var ErrSwiftBlockInvalid = errors.New("swift block is invalid")
 
+// SwiftMessage represents a collection of SWIFT financial blocks.
 type SwiftMessage struct {
 	Blocks []SwiftBlock
 }
 
+// SwiftBlock represents a SWIFT block.
 type SwiftBlock struct {
 	ID    string
 	Value interface{}
 }
 
-// Represents a parser.
+// Parser represents a parser.
 type Parser struct {
 	*Lexer
 }
 
-// Returns a new instance of Parser.
+// NewParser returns a new instance of Parser.
 func NewParser(l *Lexer) *Parser {
 	return &Parser{Lexer: l}
 }
 
-// Parses SWIFT message.
+// Parse parses SWIFT message.
 func (p *Parser) Parse() (message SwiftMessage, err error) {
 	for {
 		tok, _ := p.Lexer.Scan()

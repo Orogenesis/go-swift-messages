@@ -2,11 +2,11 @@
 [![Coverage Status](https://coveralls.io/repos/github/Orogenesis/go-swift-messages/badge.svg?branch=master)](https://coveralls.io/github/Orogenesis/go-swift-messages?branch=master)
 [![GoDoc](http://godoc.org/github.com/orogenesis/go-swift-messages?status.svg)](http://godoc.org/github.com/orogenesis/go-swift-messages)
 
-# go-swift-messages
+### go-swift-messages
 
 Parses SWIFT financial messages with different message types (MT101, MT103, MT104, MT202, MT509, MT900, MT910, MT940, MT942, MT950) into abstract syntax tree (AST) and convert ASTs back to SWIFT financial message.  
 
-### What's an MT103?
+### About MT103
 
 MT103 is a SWIFT payment message type/format used for cash transfer specifically for cross border/international wire transfer.
 
@@ -25,7 +25,7 @@ import (
 )
 
 func main()  {
-	p := go_swift_messages.NewParser(go_swift_messages.NewLexer(&bytes.Buffer{}))
+	p := swiftmessages.NewParser(swiftmessages.NewLexer(&bytes.Buffer{}))
 	message, err := p.Parse()
 	if err != nil {
 		log.Fatal(err)
@@ -35,7 +35,7 @@ func main()  {
 		fmt.Println("ID:", swiftBlock.ID)
 		
 		switch v := swiftBlock.Value.(type) {
-		case []go_swift_messages.SwiftBlock:
+		case []swiftmessages.SwiftBlock:
 			for _, newBlock := range v {
 				fmt.Printf("ID: %v, value: %v\n", newBlock.ID, newBlock.Value)
 			}
