@@ -5,8 +5,10 @@ import (
 	"errors"
 )
 
+// ErrUnexpectedType is raised when an invalid value in a SWIFT block received.
 var ErrUnexpectedType = errors.New("unexpected type")
 
+// SwiftBlockRule represents a SWIFT block settings.
 type SwiftBlockRule struct {
 	SwiftBlock
 	ShortMode bool
