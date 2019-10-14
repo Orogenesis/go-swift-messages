@@ -47,10 +47,10 @@ func Encode(swiftBlock ...SwiftBlockRule) (message string, err error) {
 
 		if current.shortMode {
 			// Add colon character, block identifier, colon character and new line
-			message += string(CHARACTER_LINEBREAK) + string(CHARACTER_COLON) + current.ID + string(CHARACTER_COLON)
+			message += string(CharacterLinebreak) + string(CharacterColon) + current.ID + string(CharacterColon)
 		} else {
 			// Add open brace character, block identifier and colon character
-			message += string(CHARACTER_LBRACKET) + current.ID + string(CHARACTER_COLON)
+			message += string(CharacterLBrace) + current.ID + string(CharacterColon)
 		}
 
 		switch v := current.Value.(type) {
@@ -69,13 +69,13 @@ func Encode(swiftBlock ...SwiftBlockRule) (message string, err error) {
 
 			if !current.shortMode {
 				// Add close brace character
-				message += string(CHARACTER_RBRACKET)
+				message += string(CharacterRBrace)
 			}
 
 			if current.closure {
 				for braceCounter > 0 {
 					// Add close brace character
-					message += string(CHARACTER_RBRACKET)
+					message += string(CharacterRBrace)
 					braceCounter--
 				}
 			}

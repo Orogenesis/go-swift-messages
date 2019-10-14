@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b023b6b1b3ac465591c0b519eac15d5a)](https://www.codacy.com/manual/Orogenesis/go-swift-messages)
 [![Build Status](https://travis-ci.org/Orogenesis/go-swift-messages.svg?branch=master)](https://travis-ci.org/Orogenesis/go-swift-messages)
 [![Coverage Status](https://coveralls.io/repos/github/Orogenesis/go-swift-messages/badge.svg?branch=master)](https://coveralls.io/github/Orogenesis/go-swift-messages?branch=master)
 [![GoDoc](http://godoc.org/github.com/orogenesis/go-swift-messages?status.svg)](http://godoc.org/github.com/orogenesis/go-swift-messages)

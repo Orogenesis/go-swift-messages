@@ -22,26 +22,26 @@ func (l *Lexer) Scan() (tok Token, lit string) {
 	ch := l.read()
 	switch ch {
 	case rune(0):
-		tok, lit = EOF, ""
-	case CHARACTER_LBRACKET:
-		tok, lit = LBRACKET, string(ch)
-	case CHARACTER_RBRACKET:
-		tok, lit = RBRACKET, string(ch)
-	case CHARACTER_COLON:
-		if l.prev == LINEBREAK {
-			tok, lit = LINEBREAK_COLON, string(ch)
+		tok, lit = TokenEOF, ""
+	case CharacterLBrace:
+		tok, lit = TokenLBrace, string(ch)
+	case CharacterRBrace:
+		tok, lit = TokenRBrace, string(ch)
+	case CharacterColon:
+		if l.prev == TokenLinebreak {
+			tok, lit = TokenLinebreakColon, string(ch)
 		} else {
-			tok, lit = COLON, string(ch)
+			tok, lit = TokenColon, string(ch)
 		}
-	case CHARACTER_LINEBREAK:
-		tok, lit = LINEBREAK, string(ch)
+	case CharacterLinebreak:
+		tok, lit = TokenLinebreak, string(ch)
 	default:
 		l.unread()
 		switch l.prev {
-		case COLON, LINEBREAK:
-			tok, lit = STRING, l.scanIdent(CHARACTER_RBRACKET)
+		case TokenColon, TokenLinebreak:
+			tok, lit = TokenString, l.scanIdent(CharacterRBrace)
 		default:
-			tok, lit = ID, l.scanIdent(CHARACTER_COLON)
+			tok, lit = TokenID, l.scanIdent(CharacterColon)
 		}
 	}
 
@@ -57,7 +57,7 @@ func (l *Lexer) scanIdent(stopCharacter rune) string {
 	for {
 		if ch := l.read(); ch == rune(0) {
 			break
-		} else if ch == stopCharacter || ch == CHARACTER_LINEBREAK {
+		} else if ch == stopCharacter || ch == CharacterLinebreak {
 			l.unread()
 			break
 		} else {

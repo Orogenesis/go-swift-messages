@@ -4,18 +4,20 @@ package swiftmessages
 type Token int
 
 const (
-	ILLEGAL Token = iota
-	EOF
-	LBRACKET
-	RBRACKET
-	STRING
-	ID
-	COLON
-	LINEBREAK
-	LINEBREAK_COLON
+	// Tokens, literals and keywords
+	TokenIllegal Token = iota
+	TokenEOF
+	TokenLBrace
+	TokenRBrace
+	TokenString
+	TokenID
+	TokenColon
+	TokenLinebreak
+	TokenLinebreakColon
 
-	CHARACTER_COLON     = ':'
-	CHARACTER_LBRACKET  = '{'
-	CHARACTER_RBRACKET  = '}'
-	CHARACTER_LINEBREAK = '\n'
+	// Characters
+	CharacterColon     = ':'
+	CharacterLBrace    = '{'
+	CharacterRBrace    = '}'
+	CharacterLinebreak = '\n'
 )

@@ -34,7 +34,7 @@ func (p *Parser) Parse() (message SwiftMessage, err error) {
 	for {
 		tok, _ := p.Lexer.Scan()
 		switch tok {
-		case LBRACKET:
+		case TokenLBrace:
 			swiftBlock, err := p.parseBlock()
 			if err != nil {
 				return message, err
@@ -55,24 +55,24 @@ func (p *Parser) parseBlock() (SwiftBlock, error) {
 		swiftBlock SwiftBlock
 	)
 
-	if tok, lit = p.Lexer.Scan(); tok != ID {
+	if tok, lit = p.Lexer.Scan(); tok != TokenID {
 		return SwiftBlock{}, ErrSwiftBlockInvalid
 	}
 
 	// Block's identifier
 	swiftBlock.ID = lit
 
-	if tok, _ = p.Lexer.Scan(); tok != COLON {
+	if tok, _ = p.Lexer.Scan(); tok != TokenColon {
 		return SwiftBlock{}, ErrSwiftBlockInvalid
 	}
 
 	tok, lit = p.Lexer.Scan()
 	switch tok {
-	case LBRACKET:
+	case TokenLBrace:
 		_ = p.Lexer.UnreadRune()
 
 		for {
-			if tok, _ := p.Lexer.Scan(); tok != LBRACKET {
+			if tok, _ := p.Lexer.Scan(); tok != TokenLBrace {
 				_ = p.Lexer.UnreadRune()
 				break
 			}
@@ -88,13 +88,13 @@ func (p *Parser) parseBlock() (SwiftBlock, error) {
 
 			swiftBlock.Value = append(swiftBlock.Value.([]SwiftBlock), newBlock)
 		}
-	case LINEBREAK:
+	case TokenLinebreak:
 		for {
 			tok, lit := p.Lexer.Scan()
-			if tok == RBRACKET {
+			if tok == TokenRBrace {
 				_ = p.Lexer.UnreadRune()
 				break
-			} else if tok == COLON || tok == LINEBREAK_COLON || tok == LINEBREAK {
+			} else if tok == TokenColon || tok == TokenLinebreakColon || tok == TokenLinebreak {
 				continue
 			} else if len(lit) == 0 {
 				continue
@@ -104,12 +104,12 @@ func (p *Parser) parseBlock() (SwiftBlock, error) {
 				swiftBlock.Value = make([]SwiftBlock, 0)
 			}
 
-			if tok == ID {
+			if tok == TokenID {
 				swiftBlock.Value = append(swiftBlock.Value.([]SwiftBlock), SwiftBlock{
 					ID:    lit,
 					Value: "",
 				})
-			} else if tok == STRING {
+			} else if tok == TokenString {
 				if swiftBlockValue, ok := swiftBlock.Value.([]SwiftBlock); ok {
 					if len(swiftBlockValue) == 0 {
 						return SwiftBlock{}, ErrSwiftBlockInvalid
@@ -125,16 +125,16 @@ func (p *Parser) parseBlock() (SwiftBlock, error) {
 				}
 			}
 		}
-	case RBRACKET:
+	case TokenRBrace:
 		swiftBlock.Value = ""
-	case STRING:
+	case TokenString:
 		swiftBlock.Value = lit
 	default:
 		return SwiftBlock{}, ErrSwiftBlockInvalid
 	}
 
-	if tok != RBRACKET {
-		if tok, lit = p.Lexer.Scan(); tok != RBRACKET {
+	if tok != TokenRBrace {
+		if tok, lit = p.Lexer.Scan(); tok != TokenRBrace {
 			return SwiftBlock{}, ErrSwiftBlockInvalid
 		}
 	}
