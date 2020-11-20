@@ -5,7 +5,7 @@
 
 ### go-swift-messages
 
-Parses SWIFT financial messages with different message types (MT101, MT103, MT104, MT202, MT509, MT900, MT910, MT940, MT942, MT950) into abstract syntax tree (AST) and convert ASTs back to SWIFT financial message.  
+Parses SWIFT financial messages with different message types (MT101, MT103, MT104, MT202, MT509, MT900, MT910, MT940, MT942, MT950).  
 
 ### About MT103
 
