@@ -33,18 +33,16 @@ func MustEncode(swiftBlock ...SwiftBlockRule) string {
 // Encode encodes swiftBlock into a SWIFT message or returns an error.
 func Encode(swiftBlock ...SwiftBlockRule) (message string, err error) {
 	queue := list.New()
-	braceCounter := 0
-
 	for _, v := range swiftBlock {
 		queue.PushBack(swiftBlockElement{
 			SwiftBlockRule: v,
 		})
 	}
 
+	braceCounter := 0
 	for queue.Len() > 0 {
 		element := queue.Front()
 		current := element.Value.(swiftBlockElement)
-
 		if current.shortMode {
 			// Add colon character, block identifier, colon character and new line
 			message += string(CharacterLinebreak) + string(CharacterColon) + current.ID + string(CharacterColon)
@@ -66,7 +64,6 @@ func Encode(swiftBlock ...SwiftBlockRule) (message string, err error) {
 			braceCounter++
 		case string:
 			message += v
-
 			if !current.shortMode {
 				// Add close brace character
 				message += string(CharacterRBrace)

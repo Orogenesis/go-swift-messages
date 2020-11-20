@@ -70,7 +70,6 @@ func (p *Parser) parseBlock() (SwiftBlock, error) {
 	switch tok {
 	case TokenLBrace:
 		_ = p.Lexer.UnreadRune()
-
 		for {
 			if tok, _ := p.Lexer.Scan(); tok != TokenLBrace {
 				_ = p.Lexer.UnreadRune()
@@ -116,7 +115,6 @@ func (p *Parser) parseBlock() (SwiftBlock, error) {
 					}
 
 					idx := len(swiftBlockValue) - 1
-
 					if len(swiftBlockValue[idx].Value.(string)) != 0 {
 						swiftBlockValue[idx].Value = swiftBlockValue[idx].Value.(string) + "\n"
 					}

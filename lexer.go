@@ -53,7 +53,6 @@ func (l *Lexer) Scan() (tok Token, lit string) {
 func (l *Lexer) scanIdent(stopCharacter rune) string {
 	buf := &bytes.Buffer{}
 	buf.WriteRune(l.read())
-
 	for {
 		if ch := l.read(); ch == rune(0) {
 			break
