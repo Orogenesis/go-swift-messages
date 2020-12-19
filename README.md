@@ -10,39 +10,3 @@ Parses SWIFT financial messages with different message types (MT101, MT103, MT10
 ### About MT103
 
 MT103 is a SWIFT payment message type/format used for cash transfer specifically for cross border/international wire transfer.
-
-### Quick Usage
-
-```go
-package main
-
-import (
-	"bytes"
-	"fmt"
-	"log"
-	"strings"
-
-	"github.com/orogenesis/go-swift-messages"
-)
-
-func main()  {
-	p := swiftmessages.NewParser(swiftmessages.NewLexer(&bytes.Buffer{}))
-	message, err := p.Parse()
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	for _, swiftBlock := range message.Blocks {
-		fmt.Println("ID:", swiftBlock.ID)
-		
-		switch v := swiftBlock.Value.(type) {
-		case []swiftmessages.SwiftBlock:
-			for _, newBlock := range v {
-				fmt.Printf("ID: %v, value: %v\n", newBlock.ID, newBlock.Value)
-			}
-		case string:
-			fmt.Println(v)
-		}
-	}
-}
-```
